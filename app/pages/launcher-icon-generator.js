@@ -23,7 +23,7 @@ const ICON_SIZE = { w: 48, h: 48 };
 const TARGET_RECTS_BY_SHAPE = {
   none: { x:  3, y:  3, w:  42, h:  42 },
   circle: { x:  2, y:  2, w:  44, h:  44 },
-  square: { x:  5, y:  5, w:  38, h:  38 },
+  square: { x:  3, y:  3, w:  42, h:  42 },
   vrect: { x:  8, y:  2, w:  32, h:  44 },
   hrect: { x:  2, y:  8, w:  44, h:  32 },
 };
@@ -72,7 +72,7 @@ export class LauncherIconGenerator extends BaseGenerator {
       fields: [
         new studio.ImageField('foreground', {
           title: 'Foreground',
-          maxFinalSize: { w: 720, h: 720 }, // max render size, for SVGs
+          maxFinalSize: { w: 1024, h: 1024 }, // max render size, for SVGs
           defaultValueTrim: 1,
           defaultValuePadding: .25,
           defaultValueClipart: 'android',
@@ -174,7 +174,7 @@ export class LauncherIconGenerator extends BaseGenerator {
     let values = this.form.getValues();
     let foreSrcCtx = values.foreground ? values.foreground.ctx : null;
     let mult = studio.Util.getMultBaseMdpi(density);
-    if (density == 'web') {
+    if (density == 'xxxhdpi') {
       mult = 512 / 48;
     }
 
@@ -218,7 +218,7 @@ export class LauncherIconGenerator extends BaseGenerator {
           case 'square':
           case 'vrect':
           case 'hrect':
-            roundRectPath_(ctx, targetRect, 3);
+            roundRectPath_(ctx, targetRect, 8);
             ctx.fill();
             break;
 
